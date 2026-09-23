@@ -1,28 +1,25 @@
 # YouTube Note Generator
 
-A lightweight Command-Line Interface (CLI) application designed to help students automatically extract YouTube subtitles and generate structured Markdown notes, grouped precisely minute-by-minute based on specific time ranges.
-
----
+A versatile Command-Line Interface (CLI) application designed to help students automatically extract YouTube subtitles, retrieve original video metadata, and generate structured Markdown notes grouped minute-by-minute with clickable timestamp links.
 
 ## Features
 
-- **Smart URL Parsing**: Extract Video IDs automatically from various formats including standard links, short links (youtu.be), and live streams.
-- **Minute-by-Minute Grouping**: Dynamically calculates and groups extracted text into specific minute blocks using `collections.defaultdict`.
-- **Robust Subprocess Execution**: Safely bypasses common Python import shadowing and environment bugs by executing the transcript API directly via shell.
-- **JSON Auto-Parsing**: Automatically flattens and parses nested JSON arrays from multi-language subtitle requests.
-
----
+- **Dual Interaction Modes**: Supports non-interactive CLI flags (`argparse`) for automation/pipelining and interactive prompts for casual terminal usage.
+- **Automated Metadata Extraction**: Fetches the video title via YouTube's public oEmbed endpoint without requiring an API key.
+- **Minute-by-Minute Grouping**: Dynamically calculates and groups extracted subtitles into clean minute blocks using `collections.defaultdict`.
+- **Clickable Timestamp Links**: Automatically embeds direct YouTube video timestamps for every minute block.
+- **Reading Statistics**: Calculates total captured words to gauge reading and study time.
+- **Robust Subprocess Execution**: Bypasses local import shadowing by executing the transcript API directly via the Python shell.
+- **JSON Auto-Parsing**: Flattens nested JSON payloads from multi-language subtitle queries.
 
 ## Prerequisites
 
-- **Python**: Version 3.0 or higher.
-- **Git**: To clone the repository to your local machine.
-
----
+- Python: Version 3.8 or higher.
+- Git: To clone the repository to your local machine.
 
 ## Installation & Setup
 
-1. **Clone the repository:**
+1. Clone the repository:
    ```bash
    git clone [https://github.com/Alif-fiansyah/yt-note-generator.git](https://github.com/Alif-fiansyah/yt-note-generator.git)
    cd yt-note-generator
@@ -48,35 +45,40 @@ A lightweight Command-Line Interface (CLI) application designed to help students
 
 | Prompt | Description | Example |
 | :--- | :--- | :--- |
-| `Masukan URL YouTube`| Link video referensi yang ingin diambil teksnya | `https://youtu.be/VeDdROBN25Q` |
-| `Mulai dari menit ke berapa?` |Menit awal ekstraksi teks dimulai | `3` |
-| `Sampai menit ke berapa?` | Menit akhir ekstraksi teks selesai | `6` |
+| `Masukan URL YouTube`| YouTube video URL (standard, shortened, or live) | `https://youtu.be/VeDdROBN25Q` |
+| `Mulai dari menit ke berapa?` |Starting extraction minute| `2` |
+| `Sampai menit ke berapa?` | Ending extraction minute | `6` |
 
 ---
 ### Sample Output
-Hasil *generate* otomatis di dalam file `catatan_rentang_VeDdROBN25Q.md`:
 
-```text
-# Catatan Video YouTube
-**URL Referensi:** [https://youtu.be/VeDdROBN25Q](https://youtu.be/VeDdROBN25Q)
-**Video ID:** VeDdROBN25Q
+Output preview inside `catatan_rentang_VwDrR0BIG5Q.md`:
 
-## Ringkasan Sesi
+````markdown
+# Pengenalan Arsitektur Jaringan Komputer
 
-### Menit ke-3
-Ini adalah teks percakapan asli yang diucapkan pada menit ketiga di dalam video tersebut secara otomatis.
+- **URL Referensi:** [https://youtu.be/VwDrR0BIG5Q](https://youtu.be/VwDrR0BIG5Q)
+- **Video ID:** `VwDrR0BIG5Q`
+- **Rentang Waktu:** Menit 2 s/d Menit 6
+- **Total Kata Terekam:** ~420 kata
 
-### Menit ke-4
-Dan ini adalah kelanjutan materi atau percakapan yang dibahas ketika video memasuki menit keempat, dipisahkan secara rapi.
-```
 ---
 
+## 📝 Rangkuman Transkrip Per Menit
+
+### [Menit ke-02:00](https://youtu.be/VwDrR0BIG5Q?t=120)
+Transkrip percakapan materi kuliah yang dibahas pada menit kedua...
+
+### [Menit ke-03:00](https://youtu.be/VwDrR0BIG5Q?t=180)
+Kelanjutan penjelasan materi kuliah yang dibahas pada menit ketiga...
+````
 ## Tech Stack
 
 - **Language**: Python 3
-- **Library**: youtube-transcript-api (Executed via shell wrapper)
-- **Core Modules**:subprocess, json, collections.defaultdict, urllib.parse
-- **Storage**: Local Markdown (.md) File System
+- **Library**: `youtube-transcript-api` (Executed via shell wrapper)
+- **CLI Parser**: `argparse`
+- **Core Modules**: `subprocess, json, collections.defaultdict, urllib.parse, urllib.request`
+- **Storage**: Local Markdown (`.md`) File System
 ---
 
 ## License
