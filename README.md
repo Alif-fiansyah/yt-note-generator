@@ -85,7 +85,7 @@ Halo guys, David disini, dan semalem Apple baru aja ngenalin...
 Yang bikin saya penasaran, dan itu cuma bisa kejawab kalau...
 ## Tech Stack
 ````
-
+### Tech Stack
 - **Language**: Python 3
 - **AI Engine**: Google Gemini API (`google-genai`)
 - **Subtitle Parser**: `youtube-transcript-api` (Executed via shell wrapper)
